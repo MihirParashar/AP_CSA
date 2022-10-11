@@ -20,7 +20,8 @@ public class Types {
         //OPERATIONS
         int a = 5;
         a = a + 3; //Add to variables
-        a += 3; //Shorthand, also works for subtraction (-=), multiplication (*=), division (/=)
+        a += 3; //Shorthand, also works for:
+        // subtraction (-=), multiplication (*=), division (/=)
         a++; //Shorthand of a += 1, also works for subtraction (a--)
     }
 }
