@@ -12,10 +12,11 @@ public class Sets {
 
     public static void main(String[] args) {
         Set<String> gymMembers = new HashSet<>();
-        String[] names = new String[]{"Dally", "Darry", "Sodapop"};
         gymMembers.add("Johnny");
         gymMembers.add("Pony");
-        gymMembers.add("Dally");
+        gymMembers.add("Darry");
+
+        String[] names = new String[]{"Darry", "Cherry", "Sodapop"};
         for (String name : names) {
             if (gymMembers.contains(name)) {
                 System.out.println(name + " is a gym member!");
