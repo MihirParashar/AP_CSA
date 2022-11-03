@@ -13,14 +13,15 @@ public class Objects {
     OBJECT: An instance of a class. An object is instantiated
     using the syntax: Class myClass = new Class();
 
-
     CONSTRUCTORS: A starting method for an object. It overrides
     the default method run when instantiating an object. Useful
     for classes with properties.
 
-    ENCAPSULATION: A concept of OOP, prevents direct access of
-    data by creating mutator methods (get/set) and keeping the
-    actual variables private.
+    ENCAPSULATION: The OOP concept of bundling data with the
+    methods that modify it, and restricting other classes from
+    directly accessing its data. This is done by keeping its
+    variables private, but creating public methods to view and
+    modify the data, AKA "getters" and "setters.
      */
     public static void main(String[] args) {
         //Instantiating objects
@@ -31,7 +32,6 @@ public class Objects {
 
         String[] names = new String[] {"John", "Timmy", "Steve", "Alex", "Charlie"};
         int[] ages = new int[] {15, 26, 31, 19, 62};
-
         for (int i = 0; i < names.length; i++) {
             Person person = new Person(names[i], ages[i]);
             System.out.println("NAME: " + person.getName() + " AGE: " + person.getAge());
@@ -41,29 +41,29 @@ public class Objects {
 
 class Person {
     //PROPERTIES
-    String name;
-    int age;
+    private String name;
+    private int age;
 
     //CONSTRUCTOR
-    Person(String setName, int setAge) {
+    public Person(String setName, int setAge) {
         name = setName;
         age = setAge;
     }
 
     //ENCAPSULATION
-    void setAge(int newAge) {
+    public void setAge(int newAge) {
         age = newAge;
     }
 
-    int getAge() {
+    public int getAge() {
         return age;
     }
 
-    void setName(String newName) {
+    public void setName(String newName) {
         name = newName;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 }
