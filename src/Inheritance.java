@@ -10,7 +10,7 @@ public class Inheritance {
     public static void main(String[] args) {
         Student student1 = new Student("Mark", 15, 1376);
 
-        //This works even though we didn't define this method in the class
+        //This works even though we didn't define this method in Student class
         System.out.println("NAME: " + student1.getName());
 
         //This will work on Student objects but not Human objects
