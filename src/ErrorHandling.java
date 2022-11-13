@@ -25,7 +25,7 @@ public class ErrorHandling {
         findItemInArray(myArray, 2);
 
         //Will throw AssertionError because index 5 is not in array
-        findItemInArray(myArray, 5);
+        findItemInArray(myArray, 20);
     }
 
     static int findItemInArray(int[] array, int index) {
