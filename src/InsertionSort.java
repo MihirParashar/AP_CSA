@@ -5,10 +5,14 @@ public class InsertionSort {
     BEST CASE: O(n)
     WORST CASE: O(n^2)
     AVERAGE CASE: O(n^2)
-    - There are two parts of the array: sorted & unsorted.
-    1. Iterate through each item in the array, starting from 1 (i).
+    There are two parts of the array: sorted & unsorted.
+
+    1. Iterate through each item in the array, starting from 1 (i). This
+    represents the separator between the sorted and unsorted part of the array.
+
     2. In each iteration, iterate downwards starting from i, excluding 0 (j).
-    3. Check if the current item (j) is less than the previous item (j-1). If so, swap the items.
+
+    3. Check if the current item (j) is less than the previous item (j - 1). If so, swap the items.
      */
 
     public static void main(String[] args) {
