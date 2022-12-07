@@ -28,7 +28,7 @@ public class MergeSort {
         System.out.println(Arrays.toString(mergeSort(values)));
     }
 
-    private static int[] mergeSort(int[] values) {
+    public static int[] mergeSort(int[] values) {
         if (values == null) {
             throw new IllegalArgumentException();
         }
