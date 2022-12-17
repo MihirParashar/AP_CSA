@@ -1,4 +1,4 @@
-public class HashMapImplementation {
+public class OurHashMap {
     /*
     Hash Maps combine arrays, linked lists, and hash codes
     to create efficient get and put methods. We can create an
@@ -29,21 +29,6 @@ public class HashMapImplementation {
     matching our key. Otherwise, return null.
      */
 
-    public static void main(String[] args) {
-        OurHashMap map = new OurHashMap();
-        map.put(10, "Hello");
-        System.out.println(map.get(10));
-        System.out.println(map.size());
-        map.put(10, "There");
-        System.out.println(map.get(10));
-        System.out.println(map.size());
-        map.put(20, "Where");
-        System.out.println(map.get(20));
-        System.out.println(map.size());
-    }
-}
-
-class OurHashMap {
     class Item {
         public Object key;
         public Object value;
@@ -83,9 +68,22 @@ class OurHashMap {
         Item start = buckets[bucketIndex];
         for (Item current = start; current != null; current = current.next) {
             if (current.key.equals(key)) {
-                 return current.value;
+                return current.value;
             }
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        OurHashMap map = new OurHashMap();
+        map.put(10, "Hello");
+        System.out.println(map.get(10));
+        System.out.println(map.size());
+        map.put(10, "There");
+        System.out.println(map.get(10));
+        System.out.println(map.size());
+        map.put(20, "Where");
+        System.out.println(map.get(20));
+        System.out.println(map.size());
     }
 }
