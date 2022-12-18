@@ -14,7 +14,7 @@ public class Generics {
     Note that type parameters CANNOT be used as
     variables, because they aren't. They're class
     names, and should be used as types. You also
-        CANNOT use them as constructors or reassign them.
+    CANNOT use them as constructors or reassign them.
     Also, arrays cannot use type parameters.
      */
     public static void main(String[] args) {

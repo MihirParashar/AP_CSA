@@ -1,4 +1,4 @@
-public class Trees {
+public class BinaryTree {
     /*
     TREE: A recursive data structure where each node has any number of child
     nodes. Useful for storing tree-like data such as files and folders.
@@ -9,7 +9,6 @@ public class Trees {
     |height of node's left child - height of node's right child| <= 1
     The height of a node is the maximum amount of depth it has.
     Here are the steps:
-
     1. If the node is null, return true (base case).
 
     2. If the difference between the node's left child height and right
@@ -18,23 +17,11 @@ public class Trees {
     3. Return if the left child is balanced AND the right child is balanced.
 
     TREE HEIGHT:
-
     1. If the node is null, return 0 (base case).
 
-    2. Otherwise, return 1 + left child's height + right child's height.
-
+    2. Otherwise, return 1 + max(left child's height, right child's height).
      */
-    public static void main(String[] args) {
-        BinaryTree myTree = new BinaryTree(1, 2, 3);
-        myTree.right = new BinaryTree(3, 4, null);
-        System.out.println(myTree.sum());
-        System.out.println(myTree.isBalanced());
-        System.out.println(myTree.height());
-    }
 
-}
-
-class BinaryTree {
     public Integer value;
     public BinaryTree left;
     public BinaryTree right;
@@ -92,6 +79,16 @@ class BinaryTree {
         if (tree == null) {
             return 0;
         }
-        return 1 + height(tree.left) + height(tree.right);
+        return 1 + Math.max(height(tree.left), height(tree.right));
     }
+
+    public static void main(String[] args) {
+        BinaryTree myTree = new BinaryTree(1, 3, null);
+        myTree.right = new BinaryTree(2, null, null);
+        myTree.right.right = new BinaryTree(3, 4, null);
+        System.out.println("Sum: " + myTree.sum());
+        System.out.println("Balanced: " + myTree.isBalanced());
+        System.out.println("Height: " + myTree.height());
+    }
+
 }
