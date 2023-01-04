@@ -12,8 +12,8 @@ public class Graphs {
     - Transit graphs, where each node is a place, and
     each edge is a highway connecting them.
 
-    DIRECTED GRAPH: A graph where edges are directional,
-    meaning you can't always go backwards from a node.
+    UNDIRECTED GRAPH: A graph where edges are undirectional,
+    meaning an edge can be traversed both ways.
 
     WEIGHTED GRAPH: A graph where each edge has its own
     weight value. This could represent many things, like
@@ -23,57 +23,97 @@ public class Graphs {
     start from, there is always some path to any other node.
      */
     public static void main(String[] args) {
-        UnweightedGraph<Integer> graph = randomUnweightedIntegerGraph(new Range(1, 5), new Range(5, 10), new Range(0, 9));
+        UnweightedGraph<Integer> graph = randomUnweightedIntegerGraph(new Range(2, 6), new Range(0, 100), 0.7, false);
+        for (Node<Integer> node : graph.getNodes()) {
+            System.out.println("Node: " + node.value);
+            StringBuilder neighborsList = new StringBuilder("Neighbors: ");
+            for (Node<Integer> neighbor : node.getNeighbors()) {
+                neighborsList.append(neighbor.value).append(" ");
+            }
+            System.out.println(neighborsList);
+        }
+        System.out.println("Undirected? " + isUndirected(graph));
     }
 
-    public static UnweightedGraph<Integer> randomUnweightedIntegerGraph(Range nodeCountRange, Range edgesPerNodeRange, Range nodeValueRange) {
+    private static boolean isUndirected(UnweightedGraph<?> graph) {
+        for (Node<?> node : graph.getNodes()) {
+            for (Node<?> neighbor : node.getNeighbors()) {
+                if (!neighbor.getNeighbors().contains(node)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static UnweightedGraph<Integer> randomUnweightedIntegerGraph(Range nodeCountRange, Range nodeValueRange, double density, boolean undirected) {
+        if (density < 0 || density > 1) {
+            throw new IllegalArgumentException("density must be between 0 and 1");
+        }
         UnweightedGraph<Integer> graph = new UnweightedGraph<>();
+        Random random = new Random();
         int nodeCount = nodeCountRange.random();
-        int edgeCount = edgesPerNodeRange.random();
         for (int i = 0; i < nodeCount; i++) {
             int value = nodeValueRange.random();
-            GraphNode<Integer> node = new GraphNode<>(value);
+            Node<Integer> node = new Node<>(value);
             graph.addNode(node);
-            graph.addEdge();
         }
+
+        for (Node<Integer> node : graph.getNodes()) {
+            for (Node<Integer> otherNode : graph.getNodes()) {
+                if (node.equals(otherNode)) continue;
+
+                double randomValue = random.nextDouble();
+                if (randomValue >= density) continue;
+
+                node.addNeighbor(otherNode);
+                if (!undirected) continue;
+                otherNode.addNeighbor(node);
+            }
+        }
+
         return graph;
     }
 }
 
-class UnweightedGraph<T> {
-    private Map<GraphNode<T>, Set<GraphNode<T>>> nodes;
-    public UnweightedGraph() {
-        nodes = new HashMap<>();
+class Node<T> {
+    public T value;
+    private final Set<Node<T>> neighbors;
+    public Node(T value) {
+        this.value = value;
+        neighbors = new HashSet<>();
     }
-    public Map<GraphNode<T>, Set<GraphNode<T>>> getNodes() {
-        return nodes;
+    public void addNeighbor(Node<T> neighbor) {
+        neighbors.add(neighbor);
     }
-    public void addNode(GraphNode<T> node) {
-        nodes.put(node, new HashSet<>());
-    }
-    public void addEdge(GraphNode<T> node, GraphNode<T> neighbor) {
-        nodes.get(node).add(neighbor);
+    public Set<Node<T>> getNeighbors() {
+        return neighbors;
     }
 }
 
-record GraphNode<T>(
-        T value) {
-
-    public Object getValue() {
-        return value;
+class UnweightedGraph<T> {
+    private final Set<Node<T>> nodes;
+    public UnweightedGraph() {
+        nodes = new HashSet<>();
+    }
+    public Set<Node<T>> getNodes() {
+        return nodes;
+    }
+    public void addNode(Node<T> node) {
+        nodes.add(node);
     }
 }
 
 class Range {
     private final Random random;
-    public int min;
-    public int max;
-    public Range(int min, int max) {
-        if (min > max) {
+    private final int min;
+    private final int max;
+    public Range(int minInclusive, int maxExclusive) {
+        if (minInclusive >= maxExclusive) {
             throw new IllegalArgumentException("Minimum value must be less than maximum value");
         }
-        this.min = min;
-        this.max = max;
+        min = minInclusive;
+        max = maxExclusive;
         random = new Random();
     }
     public int random() {
