@@ -9,9 +9,10 @@ public class Abstraction {
     INTERFACE: Conceptually, defines a shared boundary between
     two seperate components to exchange information. In Java,
     an interface is like an abstract class but even more flexible.
-    ALL of its methods MUST be defined by , and a class can implement multiple
-    interfaces. Interfaces are kind of like a contract, because all
-    classes that implement it must implement the functionality defined.
+    ALL of its methods MUST be defined by the class that implements it,
+    and a class can implement multiple interfaces. Interfaces are kind
+    of like a contract, because all classes that implement it must
+    implement the functionality defined.
      */
 
     public static void main(String[] args) {

@@ -3,8 +3,9 @@ import java.util.Set;
 
 public class Sets {
     /*
-    SETS: Like lists, but they are unordered, and multiple
-    items of the same value. Their main purpose is to simply
+    SETS: Like lists, but they are unordered, and there are no
+    duplicate items (if one tries to add a duplicate item, it
+    just won't add anything). Their main purpose is to simply
     check if an item is in a set or not.
     SYNTAX: Set<type> name = new HashSet<>();
     Mainly, the only methods are add() size(), contains()
